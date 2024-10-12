@@ -1,11 +1,11 @@
 import AuthForm from "@/components/AuthForm";
 
-const SignIN = () => {
+const SignUP = () => {
   return (
     <section className="flex-center size-full max-sm:px-6">
-      <AuthForm type="sign_in" />
+      <AuthForm type="sign_up" />
     </section>
   );
 };
 
-export default SignIN;
+export default SignUP;
