@@ -200,14 +200,14 @@ export const authFormSchema = (type: string) =>
     //sign_up only
     firstName: type === "sign_in" ? z.string().optional() : z.string().min(3),
     lastName: type === "sign_in" ? z.string().optional() : z.string().min(3),
-    address1: type === "sign_in" ? z.string().optional() : z.string().max(10),
+    address1: type === "sign_in" ? z.string().optional() : z.string().max(50),
     city: type === "sign_in" ? z.string().optional() : z.string().min(3),
     state:
       type === "sign_in" ? z.string().optional() : z.string().min(2).max(2),
     postalCode:
       type === "sign_in" ? z.string().optional() : z.string().min(3).max(6),
 
-    dob: type === "sign_in" ? z.string().optional() : z.string().min(3),
+    dateOfBirth: type === "sign_in" ? z.string().optional() : z.string().min(3),
     ssn: type === "sign_in" ? z.string().optional() : z.string().min(3),
 
     //both sign_in and sign_up
