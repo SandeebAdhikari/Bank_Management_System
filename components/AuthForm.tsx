@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
-import { set, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -20,8 +20,11 @@ import { Input } from "@/components/ui/input";
 import { authFormSchema } from "@/lib/utils";
 import CustomInput from "./CustomInput";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { signIN, signUP } from "@/lib/actions/user.action";
 
 const AuthForm = ({ type }: { type: string }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,11 +38,28 @@ const AuthForm = ({ type }: { type: string }) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values);
-    setLoading(false);
-  }
+    try {
+      if (type === "sign_up") {
+        const newUser = await signUP(data);
+        setUser(newUser);
+      }
+
+      if (type === "sign_in") {
+        const response = await signIN({
+          email: data.email,
+          password: data.password,
+        });
+
+        if (response) router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="auth-form ">
@@ -51,7 +71,7 @@ const AuthForm = ({ type }: { type: string }) => {
           </h1>
         </Link>
         <div className="flex flex-col gap-1 md:gap-3">
-          <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">
+          <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
             {user ? "Link Account" : type === "sign_in" ? "Sign In" : "Sign Up"}
             <p className="text-16 font-normal text-gray-600">
               {user
@@ -62,7 +82,7 @@ const AuthForm = ({ type }: { type: string }) => {
         </div>
       </header>
       {user ? (
-        <div className="flex flex-col gap-4">{""}</div>
+        <div className="flex flex-col gap-4">{/*plaid*/}</div>
       ) : (
         <>
           <Form {...form}>
