@@ -21,7 +21,7 @@ import { authFormSchema } from "@/lib/utils";
 import CustomInput from "./CustomInput";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { signIN, signUP } from "@/lib/actions/user.action";
+import { signIN, signUP } from "@lib/actions/user.action";
 import PlaidLink from "./PlaidLink";
 
 const AuthForm = ({ type }: { type: string }) => {
