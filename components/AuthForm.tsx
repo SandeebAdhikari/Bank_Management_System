@@ -85,15 +85,19 @@ const AuthForm = ({ type }: { type: string }) => {
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
-        <Link href="/" className="cursor-pointer flex items-center gap-1">
+        <Link
+          href="/"
+          className="cursor-pointer flex flex-col items-center gap-1"
+        >
           <Image
-            src="/icons/logo.svg"
-            width={34}
-            height={34}
+            src="/icons/sa-favicon-black.svg"
+            width={120}
+            height={120}
             alt="Horizon logo"
+            color="#121212"
           />
           <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1">
-            Horizon
+            FlexiWallet
           </h1>
         </Link>
 
